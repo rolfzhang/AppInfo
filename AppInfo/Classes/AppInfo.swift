@@ -20,7 +20,10 @@ private func string(object: AnyObject?) -> String? {
 }
 
 private func stringToInt(object: AnyObject?) -> Int? {
-  return (object as? String)?.toInt()
+    if let intStr = object as? String {
+        return Int(intStr)
+    }
+    return nil
 }
 
 private func int(object: AnyObject?) -> Int? {
@@ -32,7 +35,7 @@ private func array<T>(object: AnyObject?) -> Array<T>? {
 }
 
 public struct AppInfo {
-  private static let bundleInfo = NSBundle.mainBundle().infoDictionary as! Dictionary<String, AnyObject>
+    private static let bundleInfo = NSBundle.mainBundle().infoDictionary ?? [:]
 
   public static var CFBundleIdentifier: String? {
     return bundleInfo["CFBundleIdentifier"] >> string
